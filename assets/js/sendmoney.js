@@ -12,31 +12,69 @@ balanceEl.textContent = balance.toLocaleString("es-CL");
 
 // Simulamos registro de contactos del usuario
 
-
-// console.log(contactos[0]);
-
 const contactos = [
     {
         id: 1,
         nombre: "Jon Doe",
         cbu: "123123123",
         alias: "Johhny.Doe",
-        banco: "Aragua",
+        banco: "Banco del Empresariado",
     },
     {
         id: 2,
         nombre: "Juan Carvajal",
         cbu: "5485215",
         alias: "Juanito",
-        banco: "Maduro Bank",
+        banco: "Banco de Santiago",
+    },
+    {
+        id: 3,
+        nombre: "Estevan Trujillo",
+        cbu: "12457898",
+        alias: "Estebancito",
+        banco: "Banco Invierno",
     },
 ];
 
+const listaContactosEl = document.getElementById("listaContactos");
 
-console.log(contactos[0]);
+contactos.forEach((contacto) => {
+  const contactoEl = document.createElement("li");
 
 
+    // Agrega clases al elemento <li>.
+  // list-group-item corresponde a Bootstrap.
+  // contacto-item es una clase propia para controlar la distribución desde CSS.
+  contactoEl.classList.add("list-group-item", "contacto-item");
+  
+  // Inserta dentro del <li> la estructura HTML necesaria:
+  // un input de tipo radio y un label con los datos del contacto.
+  contactoEl.innerHTML = `
+    <input
+      class="form-check-input contacto-radio"
+      type="radio"
+      name="listGroupRadio"
+      value="${contacto.id}"
+      id="contacto-${contacto.id}"
+      required
+    />
 
+    <label class="form-check-label contacto-label" for="contacto-${contacto.id}">
+      ${contacto.nombre} CBU: ${contacto.cbu}, Alias: ${contacto.alias},
+      Banco: ${contacto.banco}
+    </label>
+  `;
+
+  listaContactosEl.appendChild(contactoEl);
+});
+
+/* <li class="list-group-item">
+    <input class="form-check-input me-1" type="radio" name="contacto-seleccionado"
+        value="" id="firstRadio" required />
+    <label class="form-check-label" for="firstRadio">John Doe CBU: 123456789, Alias:
+        john.doe, Banco: ABC
+        Bank</label>
+</li> */
 
 
 

@@ -1,83 +1,208 @@
-// simulamos la carga de un balance inicial Le asignamos un valor simulado a la base de datos
+// Simulamos la carga de un balance inicial.
+// Utilizamos let porque el balance podrá aumentar o disminuir.
+let balance = 100_000;
 
-let balance = 100_000; //variables let pueden aumentar/disminuir
-
-// capturamos elementos del dom que demuestran balance
-
+// Capturamos el elemento del DOM donde mostraremos el balance.
 const balanceEl = document.getElementById("balance");
 
-//le decimos al navegador que clase de divisa estamos utilizando (en este caso, solo usamos . y no ,)
-
+// Mostramos el balance utilizando el formato numérico de Chile.
 balanceEl.textContent = balance.toLocaleString("es-CL");
 
-// Simulamos registro de contactos del usuario
-
+// Simulamos el registro de contactos del usuario.
 const contactos = [
-    {
-        id: 1,
-        nombre: "Jon Doe",
-        cbu: "123123123",
-        alias: "Johhny.Doe",
-        banco: "Banco del Empresariado",
-    },
-    {
-        id: 2,
-        nombre: "Juan Carvajal",
-        cbu: "5485215",
-        alias: "Juanito",
-        banco: "Banco de Santiago",
-    },
-    {
-        id: 3,
-        nombre: "Estevan Trujillo",
-        cbu: "12457898",
-        alias: "Estebancito",
-        banco: "Banco Invierno",
-    },
+  {
+    id: 1,
+    nombre: "Jon Doe",
+    cbu: "123123123",
+    alias: "Johhny.Doe",
+    banco: "Banco del Empresariado",
+  },
+  {
+    id: 2,
+    nombre: "Juan Carvajal",
+    cbu: "5485215",
+    alias: "Juanito",
+    banco: "Banco de Santiago",
+  },
+  {
+    id: 3,
+    nombre: "Estevan Trujillo",
+    cbu: "12457898",
+    alias: "Estebancito",
+    banco: "Banco Invierno",
+  },
 ];
 
+// Capturamos los elementos del DOM relacionados con los contactos.
 const listaContactosEl = document.getElementById("listaContactos");
+const buscarContactoEl = document.getElementById("buscarContacto");
 
-contactos.forEach((contacto) => {
-  const contactoEl = document.createElement("li");
+// Esta función recibe un arreglo de contactos y los muestra en el HTML.
+function cargarContactos(listaContactos) {
+  // Limpiamos la lista para evitar que los contactos se repitan.
+  listaContactosEl.innerHTML = "";
 
+  listaContactos.forEach((contacto) => {
+    const contactoEl = document.createElement("li");
 
-    // Agrega clases al elemento <li>.
-  // list-group-item corresponde a Bootstrap.
-  // contacto-item es una clase propia para controlar la distribución desde CSS.
-  contactoEl.classList.add("list-group-item", "contacto-item");
-  
-  // Inserta dentro del <li> la estructura HTML necesaria:
-  // un input de tipo radio y un label con los datos del contacto.
-  contactoEl.innerHTML = `
-    <input
-      class="form-check-input contacto-radio"
-      type="radio"
-      name="listGroupRadio"
-      value="${contacto.id}"
-      id="contacto-${contacto.id}"
-      required
-    />
+    // Agregamos una clase de Bootstrap y una clase propia.
+    contactoEl.classList.add("list-group-item", "contacto-item");
 
-    <label class="form-check-label contacto-label" for="contacto-${contacto.id}">
-      ${contacto.nombre} CBU: ${contacto.cbu}, Alias: ${contacto.alias},
-      Banco: ${contacto.banco}
-    </label>
-  `;
+    // Insertamos un radio button y los datos correspondientes.
+    contactoEl.innerHTML = `
+      <input
+        class="form-check-input contacto-radio"
+        type="radio"
+        name="listGroupRadio"
+        value="${contacto.id}"
+        id="contacto-${contacto.id}"
+        required
+      />
 
-  listaContactosEl.appendChild(contactoEl);
+      <label class="form-check-label contacto-label" for="contacto-${contacto.id}">
+        ${contacto.nombre}, CBU: ${contacto.cbu}, Alias: ${contacto.alias},
+        Banco: ${contacto.banco}
+      </label>
+    `;
+
+    listaContactosEl.appendChild(contactoEl);
+  });
+}
+
+// buscador de nombres.
+buscarContactoEl.addEventListener("input", function (event) {
+  // Convertimos el texto escrito a minúsculas.
+  const textoBusqueda = event.target.value.toLowerCase();
+
+  // Filtramos los parametros de los contactos que coincidan con el texto ingresado.
+  const contactosFiltrados = contactos.filter(function (contacto) {
+    const nombre = contacto.nombre.toLowerCase();
+    const alias = contacto.alias.toLowerCase();
+    const banco = contacto.banco.toLowerCase();
+    const cbu = String(contacto.cbu);
+
+    const reglaNombre = nombre.includes(textoBusqueda);
+    const reglaAlias = alias.includes(textoBusqueda);
+    const reglaCbu = cbu.includes(textoBusqueda);
+    const reglaBanco = banco.includes(textoBusqueda);
+
+    return reglaNombre || reglaAlias || reglaCbu || reglaBanco;
+  });
+
+  // Mostramos solamente las coincidencias encontradas.
+  cargarContactos(contactosFiltrados);
 });
 
-/* <li class="list-group-item">
-    <input class="form-check-input me-1" type="radio" name="contacto-seleccionado"
-        value="" id="firstRadio" required />
-    <label class="form-check-label" for="firstRadio">John Doe CBU: 123456789, Alias:
-        john.doe, Banco: ABC
-        Bank</label>
-</li> */
+// Función principal: carga los datos iniciales al abrir la página.
+function main() {
+  cargarContactos(contactos);
+}
+
+main();
 
 
 
+//LÓGICA DE ENVIAR DINERO A UN USUARIO SELECCIONADO
+
+const formSendMoneyEl = document.getElementById("formSendMoney");
+
+//AGREGAMOS EL EVENTO SUBMIT
+
+formSendMoneyEl.addEventListener("submit", function (event) {
+
+  //DEBEMOS PREVENIR LAS ACCIONES POR DEFECTO
+  event.preventDefault();
+
+  //CAPTURAMOS LA DATA DEL FORMULARIO
+  let dataFormulario = new FormData(formSendMoneyEl);
+
+  let monto = dataFormulario.get("monto");
+
+  monto = Number(monto);
+
+  //PREGUNTAMOS AL USUARIO SI ESTÁ SEGURO DE TRANSFERIR
+  let confirmacion = confirm(`¿Está seguro de transferir la suma de: $ ${monto.toLocaleString("es-CL")}?`);
+
+  if (!confirmacion) {
+    //EL RETURN DETIENE LA EJECUCIÓN DEL RESTO DE CÓDIGO
+    return;
+  }
+
+
+  let cbuContacto = dataFormulario.get("contacto");
+
+  //VALIDAR SI EXISTE SALDO DISPONIBLE Y DESCONTAR DE SER POSIBLE
+
+  if (balance >= monto) {
+    //EN ESTE CASO PUEDO TRANSFERIR
+    balance = balance - monto;
+    let textoMensaje =
+      `Se ha transferido correctamente la suma de: $ ${monto.toLocaleString("es-CL")} a la cuenta\nN° ${cbuContacto}.
+\nSu nuevo saldo es de: ${balance.toLocaleString("es-CL")}
+`;
+    alert(textoMensaje);
+
+    //ACTUALIZAMOS EL BALANCE EN EL SPAN DEL DOM
+    balanceEl.textContent = balance.toLocaleString("es-CL");
+
+    //limpiamos el formulario
+    formSendMoneyEl.reset();
+    cargarContactos(contactos);
+
+  } else {
+    alert("Usted no disponible de saldo suficiente");
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function filtrarContactos(textoFiltro) {
+
+
+//   let contactosFiltrados = contactos.filter(function (contacto) {
+
+//     let { id, nombre, cbu, alias, banco } = contacto;
+
+//     //NORMALIZAR LOS NOMBRES Y EL TEXTO BUSCADO EN MINÚSCULAS
+//     nombre = nombre.toLowerCase();
+//     alias = alias.toLowerCase();
+//     banco = banco.toLowerCase();
+
+//     textoFiltro = textoFiltro.toLowerCase();
+
+
+//     let reglaNombre = nombre.includes(textoFiltro);
+//     let reglaAlias = alias.includes(textoFiltro);
+//     let reglaBanco = banco.includes(textoFiltro);
+//     let reglaCBU = cbu.includes(textoFiltro);
+
+//     if (reglaNombre || reglaAlias || reglaBanco || reglaCBU) {
+//       return contacto;
+//     }
+
+//   });
+
+//   listaContactosEl(contactosFiltrados);
+
+// }
+
+
+// function init() {
+//   listaContactosEl(contactosFiltrados);
+// }
+
+// init();
 
 
 

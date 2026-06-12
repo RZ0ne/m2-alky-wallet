@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Laboratorio JavaScript</title>
+
+    <!-- Hoja de estilos -->
+    <link rel="stylesheet" href="./prueba.css" />
+
+    <!-- Archivo JavaScript -->
+    <script src="./script.js" defer></script>
+</head>
+
+<body>
+    <!-- Encabezado principal -->
+    <header class="header">
+        <div class="container">
+            <h1 id="tituloPrincipal">Laboratorio JavaScript</h1>
+
+            <p id="descripcionPrincipal">
+                Una página sencilla para practicar manipulación del DOM y eventos.
+            </p>
+
+            <nav class="navbar">
+                <ul class="navbar__lista">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#articulos">Artículos</a></li>
+                    <li><a href="#tareas">Tareas</a></li>
+                    <li><a href="#formulario">Formulario</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="container">
+        <!-- Sección introductoria -->
+        <section id="inicio" class="seccion">
+            <h2>Zona de pruebas</h2>
+
+            <p>
+                Puedes utilizar esta página para practicar cambios de texto, botones,
+                listas, formularios y creación de elementos desde JavaScript.
+            </p>
+
+            <button id="botonSaludo" class="boton" type="button">
+                Mostrar saludo
+            </button>
+
+            <button id="botonTema" class="boton boton--secundario" type="button">
+                Cambiar tema
+            </button>
+
+            <p id="mensajeSaludo" class="mensaje"></p>
+        </section>
+
+        <!-- Sección con artículos -->
+        <section id="articulos" class="seccion">
+            <h2>Artículos destacados</h2>
+
+            <div class="grid-articulos">
+                <article class="articulo">
+                    <h3>Manipulación del DOM</h3>
+
+                    <p>
+                        JavaScript permite modificar el contenido, los estilos y la
+                        estructura de una página web.
+                    </p>
+
+                    <button class="boton-articulo" type="button">
+                        Marcar como leído
+                    </button>
+                </article>
+
+                <article class="articulo">
+                    <h3>Eventos</h3>
+
+                    <p>
+                        Los eventos permiten ejecutar acciones cuando una persona hace
+                        clic, escribe o envía un formulario.
+                    </p>
+
+                    <button class="boton-articulo" type="button">
+                        Marcar como leído
+                    </button>
+                </article>
+
+                <article class="articulo">
+                    <h3>Creación de elementos</h3>
+
+                    <p>
+                        También puedes crear etiquetas HTML desde JavaScript y agregarlas
+                        dinámicamente a la página.
+                    </p>
+
+                    <button class="boton-articulo" type="button">
+                        Marcar como leído
+                    </button>
+                </article>
+            </div>
+        </section>
+
+        <!-- Sección con una lista -->
+        <section id="tareas" class="seccion">
+            <h2>Lista de tareas</h2>
+
+            <p>
+                Agrega elementos a la lista utilizando el formulario.
+            </p>
+
+            <div class="formulario-tarea">
+                <input id="inputTarea" type="text" placeholder="Escribe una nueva tarea" />
+
+                <button id="botonAgregarTarea" class="boton" type="button">
+                    Agregar tarea
+                </button>
+            </div>
+
+            <ul id="listaTareas" class="lista-tareas">
+                <li>Revisar selectores del DOM</li>
+                <li>Practicar eventos con botones</li>
+                <li>Crear elementos desde JavaScript</li>
+            </ul>
+        </section>
+
+        <!-- Sección con formulario -->
+        <section id="formulario" class="seccion">
+            <h2>Formulario de contacto</h2>
+
+            <form id="formContacto" class="formulario">
+                <div class="formulario__grupo">
+                    <label for="nombre">Nombre</label>
+
+                    <input id="nombre" name="nombre" type="text" placeholder="Ingresa tu nombre" required />
+                </div>
+
+                <div class="formulario__grupo">
+                    <label for="email">Correo electrónico</label>
+
+                    <input id="email" name="email" type="email" placeholder="nombre@correo.com" required />
+                </div>
+
+                <div class="formulario__grupo">
+                    <label for="mensaje">Mensaje</label>
+
+                    <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe tu mensaje"></textarea>
+                </div>
+
+                <button class="boton" type="submit">
+                    Enviar formulario
+                </button>
+            </form>
+
+            <p id="respuestaFormulario" class="mensaje"></p>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="container">
+            <p>
+                Laboratorio de práctica JavaScript | Rogelio Zuñiga
+                <span id="anioFooter"></span>
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>

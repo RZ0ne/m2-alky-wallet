@@ -1,4 +1,4 @@
-import { obtenerBalance, depositar, transferir } from "./balance.js";
+import { obtenerBalance, transferir } from "./balance.js";
 
 const balanceEl = document.getElementById("balance");
 

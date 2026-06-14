@@ -53,11 +53,13 @@
     <section>
       <div class="row justify-content-center">
         <div class="col-12 col-sm-7 col-lg-5">
-          <form>
+          <form id="formDeposit">
             <div class="mb-3">
+              <h2>Saldo Actual $<span id="balance">0</span></h2>
+
               <label for="depositos" class="form-label">Ingresa el monto a depositar:</label>
               <input type="number" class="form-control" name="depositos" id="depositos" required
-                placeholder="Introduce el monto a depositar" />
+                placeholder="Introduce el monto a depositar" min="500" />
             </div>
             <div>
               <input type="submit" class="btn btn-primary" value="Realizar deposito" />
@@ -71,6 +73,8 @@
   <footer class="container-fluid bg-secondary text-white text-center py-3">
     Alky Wallet - Todos los derechos reservados
   </footer>
+  <script type="module" src="./assets/js/deposito.js"></script>
+
 </body>
 
 </html>

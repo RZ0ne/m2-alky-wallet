@@ -70,16 +70,15 @@
                             <h2>Contactos registrados</h2>
 
                             <div class="mb-3">
-                                <ul class="list-group" id="listaContactos">
+                                <ul class="list-group" id="listaContactos" name="contacto">
                                     <!-- aquí se carga el listado de personas del usuario -->
                                 </ul>
                             </div>
                         </div>
-<div class="mb-3">
-<laber class="form-label" for="monto">Monto a transferir</laber>
-<input type="number" class="form-control" min="500" name="monto" id="monto
-">
-</div>
+                        <div class="mb-3">
+                            <laber class="form-label" for="monto">Monto a transferir</laber>
+                            <input type="number" class="form-control" min="500" name="monto" id="monto">
+                        </div>
                         <div class="mb-3">
 
                             <input type="submit" class="btn btn-primary" value="Enviar dinero" />
@@ -100,7 +99,7 @@
         </script>
 
     <!-- JavaScript propio -->
-    <script src="./assets/js/sendmoney.js"></script>
+    <script type="module" src="./assets/js/sendmoney.js"></script>
 </body>
 
 </html>

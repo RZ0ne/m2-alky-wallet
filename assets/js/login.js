@@ -33,8 +33,12 @@ formLoginEl.addEventListener("submit", function (event) {
 
     //rescatamos contenidos que ingreso el usuario por el email, para ello capturamos valores ingresados por usuario en inputs
 
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
+//Recuperacion mediante jquery
+let email = $('#email').val();
+let password = $('#password').val();
+
+    // let email = document.getElementById("email").value;
+    // let password = document.getElementById("password").value;
 
     validarCredenciales(email, password);
 

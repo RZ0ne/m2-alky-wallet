@@ -48,36 +48,32 @@
 
     <main class="container flex-grow-1">
         <section>
-
             <div class="row justify-content-center">
-                <div class="col-12 col-sm-7 col-lg-5 ">
+                <div class="col-12 col-sm-7 col-lg-5">
 
                     <form id="formLogin">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email:</label>
                             <input type="email" class="form-control" name="email" id="email" required>
                         </div>
+
                         <div class="mb-3">
                             <label for="password" class="form-label">Contraseña:</label>
                             <input type="password" class="form-control" name="password" id="password" required>
-                        </div mb-3>
-                        <div><input type="submit" class="btn btn-primary" value="Login"></div>
+                        </div>
 
+                        <div>
+                            <input type="submit" class="btn btn-primary" value="Login">
+                        </div>
                     </form>
 
+                    <div id="respuestaFormulario" class="alert d-none mt-3 py-2 px-3 small" role="alert"></div>
+
                 </div>
-
             </div>
-
-
-
-
-
         </section>
-
-
-
     </main>
+
     <footer class="container-fluid bg-secondary text-white text-center py-3">
         Alky Wallet - Todos los derechos reservados
     </footer>

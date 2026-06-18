@@ -5,7 +5,7 @@ const BALANCE_KEY = "alky_balance";
 let balanceGuardado = localStorage.getItem(BALANCE_KEY);
 
 // Si no existe, usamos 100.000 como balance inicial
-let balance = balanceGuardado === null ? 100_000 : Number(balanceGuardado);
+let balance = (balanceGuardado === null) ? 100_000 : Number(balanceGuardado);
 
 function guardarBalance() {
   localStorage.setItem(BALANCE_KEY, balance);

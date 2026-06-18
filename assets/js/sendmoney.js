@@ -44,7 +44,7 @@ function cargarContactos(listaContactos) {
     contactoEl.classList.add("list-group-item", "contacto-item");
 
     // Insertamos un radio button y los datos correspondientes.
-contactoEl.innerHTML = `
+    contactoEl.innerHTML = `
   <input
     class="form-check-input contacto-radio"
     type="radio"
@@ -127,15 +127,13 @@ formSendMoneyEl.addEventListener("submit", function (event) {
 
   if (transferir(monto)) {
     let textoMensaje = `Se ha transferido correctamente la suma de: $ ${monto.toLocaleString("es-CL")} a la cuenta
-N° ${cbuContacto}.
+  N° ${cbuContacto}.
 
-Su nuevo saldo es de: $ ${obtenerBalance().toLocaleString("es-CL")}
-`;
+  Su nuevo saldo es de: $ ${obtenerBalance().toLocaleString("es-CL")}
+  `;
 
     alert(textoMensaje);
-
     balanceEl.textContent = obtenerBalance().toLocaleString("es-CL");
-
     formSendMoneyEl.reset();
     cargarContactos(contactos);
   } else {

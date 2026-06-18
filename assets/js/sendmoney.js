@@ -1,32 +1,35 @@
 import { obtenerBalance, transferir } from "./balance.js";
+import { obtenerContacto } from "./listaContactos.js";
 
 const balanceEl = document.getElementById("balance");
 
 balanceEl.textContent = obtenerBalance().toLocaleString("es-CL");
 
-const contactos = [
-  {
-    id: 1,
-    nombre: "Jon Doe",
-    cbu: "123123123",
-    alias: "Johhny.Doe",
-    banco: "Banco del Empresariado",
-  },
-  {
-    id: 2,
-    nombre: "Juan Carvajal",
-    cbu: "5485215",
-    alias: "Juanito",
-    banco: "Banco de Santiago",
-  },
-  {
-    id: 3,
-    nombre: "Estevan Trujillo",
-    cbu: "12457898",
-    alias: "Estebancito",
-    banco: "Banco Invierno",
-  },
-];
+const contactosRegistrados = obtenerContacto();
+
+// const contactos = [
+//   {
+//     id: 1,
+//     nombre: "Jon Doe",
+//     cbu: "123123123",
+//     alias: "Johhny.Doe",
+//     banco: "Banco del Empresariado",
+//   },
+//   {
+//     id: 2,
+//     nombre: "Juan Carvajal",
+//     cbu: "5485215",
+//     alias: "Juanito",
+//     banco: "Banco de Santiago",
+//   },
+//   {
+//     id: 3,
+//     nombre: "Estevan Trujillo",
+//     cbu: "12457898",
+//     alias: "Estebancito",
+//     banco: "Banco Invierno",
+//   },
+// ];
 
 // Capturamos los elementos del DOM relacionados con los contactos.
 const listaContactosEl = document.getElementById("listaContactos");
@@ -70,7 +73,7 @@ buscarContactoEl.addEventListener("input", function (event) {
   const textoBusqueda = event.target.value.toLowerCase();
 
   // Filtramos los parametros de los contactos que coincidan con el texto ingresado.
-  const contactosFiltrados = contactos.filter(function (contacto) {
+const contactosFiltrados = contactosRegistrados.filter(function (contacto) {
     const nombre = contacto.nombre.toLowerCase();
     const alias = contacto.alias.toLowerCase();
     const banco = contacto.banco.toLowerCase();
@@ -90,7 +93,7 @@ buscarContactoEl.addEventListener("input", function (event) {
 
 // Función principal: carga los datos iniciales al abrir la página.
 function main() {
-  cargarContactos(contactos);
+  cargarContactos(contactosRegistrados);
 }
 
 main();
@@ -135,7 +138,7 @@ formSendMoneyEl.addEventListener("submit", function (event) {
     alert(textoMensaje);
     balanceEl.textContent = obtenerBalance().toLocaleString("es-CL");
     formSendMoneyEl.reset();
-    cargarContactos(contactos);
+    cargarContactos(contactosRegistrados);
   } else {
     alert("Usted no dispone de saldo suficiente");
   }
